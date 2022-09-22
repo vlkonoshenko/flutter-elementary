@@ -16,30 +16,30 @@ class TripleValueListenableBuilder<F, S, T> extends StatefulWidget {
   /// represented by this widget.
   final Widget Function(
     BuildContext context,
-    F? firstValue,
-    S? secondValue,
-    T? thirdValue,
+    F firstValue,
+    S secondValue,
+    T thirdValue,
   ) builder;
 
   /// Create an instance of TripleValueListenableBuilder.
   const TripleValueListenableBuilder({
-    Key? key,
+    super.key,
     required this.firstSource,
     required this.secondSource,
     required this.thirdSource,
     required this.builder,
-  }) : super(key: key);
+  });
 
   @override
-  _TripleValueListenableBuilderState createState() =>
+  State<TripleValueListenableBuilder<F, S, T>> createState() =>
       _TripleValueListenableBuilderState<F, S, T>();
 }
 
 class _TripleValueListenableBuilderState<F, S, T>
     extends State<TripleValueListenableBuilder<F, S, T>> {
-  F? _firstValue;
-  S? _secondValue;
-  T? _thirdValue;
+  late F _firstValue;
+  late S _secondValue;
+  late T _thirdValue;
 
   @override
   void initState() {
@@ -87,14 +87,12 @@ class _TripleValueListenableBuilderState<F, S, T>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return widget.builder(
-      context,
-      _firstValue,
-      _secondValue,
-      _thirdValue,
-    );
-  }
+  Widget build(BuildContext context) => widget.builder(
+        context,
+        _firstValue,
+        _secondValue,
+        _thirdValue,
+      );
 
   void _firstValueChanged() {
     setState(() {

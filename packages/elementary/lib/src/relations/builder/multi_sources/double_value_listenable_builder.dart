@@ -11,26 +11,26 @@ class DoubleValueListenableBuilder<F, S> extends StatefulWidget {
 
   /// Function that used to describe the part of the user interface
   /// represented by this widget.
-  final Widget Function(BuildContext context, F? firstValue, S? secondValue)
+  final Widget Function(BuildContext context, F firstValue, S secondValue)
       builder;
 
   /// Create an instance of DoubleValueListenableBuilder.
   const DoubleValueListenableBuilder({
-    Key? key,
+    super.key,
     required this.firstValue,
     required this.secondValue,
     required this.builder,
-  }) : super(key: key);
+  });
 
   @override
-  _DoubleValueListenableBuilderState createState() =>
+  State<DoubleValueListenableBuilder<F, S>> createState() =>
       _DoubleValueListenableBuilderState<F, S>();
 }
 
 class _DoubleValueListenableBuilderState<F, S>
     extends State<DoubleValueListenableBuilder<F, S>> {
-  F? _firstValue;
-  S? _secondValue;
+  late F _firstValue;
+  late S _secondValue;
 
   @override
   void initState() {
@@ -68,9 +68,8 @@ class _DoubleValueListenableBuilderState<F, S>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return widget.builder(context, _firstValue, _secondValue);
-  }
+  Widget build(BuildContext context) =>
+      widget.builder(context, _firstValue, _secondValue);
 
   void _firstValueChanged() {
     setState(() {
